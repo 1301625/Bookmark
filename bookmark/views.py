@@ -31,3 +31,15 @@ class BookmarkCreateView(generic.CreateView):
 
 class BookmarkDetailView(generic.DetailView):
     model = Bookmark
+
+
+class BookmarkUpdateView(generic.UpdateView):
+    model = Bookmark
+    fields = ['site_name', 'url']
+    template_name_suffix = "_update"
+    success_url = reverse_lazy('bookmark:list')
+
+
+class BookmarkDeleteView(generic.DeleteView):
+    model = Bookmark
+    success_url = reverse_lazy('bookmark:list')
