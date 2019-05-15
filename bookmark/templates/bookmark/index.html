@@ -5,9 +5,34 @@
     <title>북마크</title>
 </head>
 <body>
-    {% for foo in bookmark_list %}
-        <p>{{ foo.site_name }}</p>
-    {% endfor %}
+    <div class="btn-group">
+        <a href="{% url 'bookmark:add' %}" class="btn btn-info">북마크 추가</a>
+    </div>
+    <p></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">site</th>
+                <th scope="col">URL</th>
+                <th scope="col">Modify</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bookmark in bookmark_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ bookmark.site_name }}</td>
+                    <td><a href="{{ bookmark.url }}" target="_blank">{{ bookmark.url }}</a></td>
+                    <td><a href="#" class="btn btn-success btn-sm">Modify</a></td>
+                    <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
 
 </body>
 </html>
