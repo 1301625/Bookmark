@@ -23,7 +23,7 @@
             {% for bookmark in bookmark_list %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ bookmark.site_name }}</td>
+                    <td><a href="{% url 'bookmark:detail' bookmark.id %}">{{ bookmark.site_name }}</a></td>
                     <td><a href="{{ bookmark.url }}" target="_blank">{{ bookmark.url }}</a></td>
                     <td><a href="#" class="btn btn-success btn-sm">Modify</a></td>
                     <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>

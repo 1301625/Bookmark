@@ -27,3 +27,7 @@ class BookmarkCreateView(generic.CreateView):
     예를 들어, 작성자 모델의 개체를 업데이트하는 보기에 대해 이 속성을 '_update_form'으로 변경하면 기본 template_name이 
     'myap/auter_update_form.html'이 될 수 있다.
     """
+
+
+class BookmarkDetailView(generic.DetailView):
+    model = Bookmark
