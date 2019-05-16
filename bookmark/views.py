@@ -11,6 +11,7 @@ from django.urls import reverse_lazy
 class BookmarkList(generic.ListView):
     model = Bookmark
     template_name = 'bookmark/index.html'
+    paginate_by = 6
 
 
 class BookmarkCreateView(generic.CreateView):
