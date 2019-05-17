@@ -3,6 +3,10 @@
 {% block title %}Detail{% endblock %}
 
 {% block content %}
-    <p>{{ bookmark.site_name }}</p>
-    <p>{{ bookmark.url  }}</p>
+    {% if bookmark %}
+        <p>{{ bookmark.site_name }}</p>
+        <p>{{ bookmark.url  }}</p>
+        {% else %}
+        <p>no bookmark data</p>
+    {% endif %}
 {% endblock %}

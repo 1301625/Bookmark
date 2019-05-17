@@ -19,49 +19,55 @@
         </tr>
         </thead>
         <tbody>
-        {% for bookmark in bookmark_list %}
+        {% if bookmark_list %}
             <tr>
-                <td>{{ forloop.counter }}</td>
-                <td><a href="{% url 'bookmark:detail' bookmark.id %}">{{ bookmark.site_name }}</a></td>
-                <td><a href="{{ bookmark.url }}" target="_blank">{{ bookmark.url }}</a></td>
-                <td><a href="{% url 'bookmark:update' bookmark.id %}" class="btn btn-success btn-sm">Modify</a></td>
-                <td><a href="{% url 'bookmark:delete' bookmark.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                {% for bookmark in bookmark_list %}
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url 'bookmark:detail' bookmark.id %}">{{ bookmark.site_name }}</a></td>
+                    <td><a href="{{ bookmark.url }}" target="_blank">{{ bookmark.url }}</a></td>
+                    <td><a href="{% url 'bookmark:update' bookmark.id %}" class="btn btn-success btn-sm">Modify</a></td>
+                    <td><a href="{% url 'bookmark:delete' bookmark.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                {% endfor %}
             </tr>
-        {% endfor %}
-
+            {% else %}
+                <p>no bookmark list</p>
+        {% endif %}
         </tbody>
     </table>
 
 
-{% block pagination %}
-    {% if is_paginated %}
-        <ul class="pagination justify-content-cent pagination-sm">
-            {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a href="{% url 'bookmark:list' %}?page={{ page_obj.previous_page_number }}" tabindex="-1" class="page-link">이전</a>
-                </li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a href="#" class="page-link" tabindex="-1">이전</a>
-                </li>
-            {% endif %}
+    {% block pagination %}
+        {% if is_paginated %}
+            <ul class="pagination justify-content-cent pagination-sm">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a href="{% url 'bookmark:list' %}?page={{ page_obj.previous_page_number }}" tabindex="-1"
+                           class="page-link">이전</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a href="#" class="page-link" tabindex="-1">이전</a>
+                    </li>
+                {% endif %}
 
-            {% for object in page_obj.paginator.page_range %}
-                <li class="page-item {% if page_obj.number == forloop.counter %}disabled{% endif %}">
-                    <a class="page-link" href="{{ request.path }}?page={{ forloop.counter }}">{{ forloop.counter }}</a>
-                </li>
-            {% endfor %}
-            {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a href="{% url 'bookmark:list' %}?page={{ page_obj.next_page_number }}" class="page-link">다음</a>
-                </li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a href="#" class="page-link">다음</a>
-                </li>
-            {% endif %}
+                {% for object in page_obj.paginator.page_range %}
+                    <li class="page-item {% if page_obj.number == forloop.counter %}disabled{% endif %}">
+                        <a class="page-link"
+                           href="{{ request.path }}?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                    </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a href="{% url 'bookmark:list' %}?page={{ page_obj.next_page_number }}"
+                           class="page-link">다음</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a href="#" class="page-link">다음</a>
+                    </li>
+                {% endif %}
 
-        </ul>
-    {% endif %}
-{% endblock %}
+            </ul>
+        {% endif %}
+    {% endblock %}
 {% endblock %}
